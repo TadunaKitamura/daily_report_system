@@ -9,17 +9,17 @@ import utils.DBUtil;
  */
 public class ServiceBase {
 
-    /**
-     * EntityManagerインスタンス
-     */
-    protected EntityManager em = DBUtil.createEntityManager();
+	/**
+	 * EntityManagerインスタンス
+	 */
+	protected EntityManager em = DBUtil.createEntityManager();
 
-    /**
-     * EntityManagerのクローズ
-     */
-    public void close() {
-        if (em.isOpen()) {
-            em.close();
-        }
-    }
+	/**
+	 * EntityManagerのクローズ
+	 */
+	public void close() {
+		if (em.isOpen()) {
+			em.close();
+		}
+	}
 }

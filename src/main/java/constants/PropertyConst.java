@@ -6,15 +6,16 @@ package constants;
  */
 public enum PropertyConst {
 
-    //ペッパー文字列
-    PEPPER("pepper");
+	//ペッパー文字列
+	PEPPER("pepper");
 
-    private final String text;
-    private PropertyConst(final String text) {
-        this.text = text;
-    }
+	private final String text;
 
-    public String getValue() {
-        return this.text;
-    }
+	private PropertyConst(final String text) {
+		this.text = text;
+	}
+
+	public String getValue() {
+		return this.text;
+	}
 }
