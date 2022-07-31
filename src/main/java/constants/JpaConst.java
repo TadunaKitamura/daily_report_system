@@ -40,9 +40,25 @@ public interface JpaConst {
 	String REP_COL_CREATED_AT = "created_at"; //登録日時
 	String REP_COL_UPDATED_AT = "updated_at"; //更新日時
 
+	//いいねテーブル
+		String TABLE_FAV = "favorites"; //テーブル名
+		//いいねテーブルカラム
+		String FAV_COL_ID = "id"; //id
+		String FAV_COL_EMP = "employee_id"; //日報を作成した従業員のid
+		String FAV_COL_REP = "report_id"; //日報のid
+
+	//確認しますテーブル
+		String TABLE_CON = "confirmations"; //テーブル名
+	//確認しますテーブルカラム
+		String CON_COL_ID = "id"; //id
+		String CON_COL_EMP = "employee_id"; //日報を作成した従業員のid
+		String CON_COL_REP = "report_id"; //日報のid
+
 	//Entity名
 	String ENTITY_EMP = "employee"; //従業員
 	String ENTITY_REP = "report"; //日報
+	String ENTITY_FAV = "favorites"; //いいね
+	String ENTITY_CON = "confirmations"; //確認します
 
 	//JPQL内パラメータ
 	String JPQL_PARM_CODE = "code"; //社員番号
@@ -77,4 +93,26 @@ public interface JpaConst {
 	String Q_REP_COUNT_ALL_MINE = ENTITY_REP + ".countAllMine";
 	String Q_REP_COUNT_ALL_MINE_DEF = "SELECT COUNT(r) FROM Report AS r WHERE r.employee = :" + JPQL_PARM_EMPLOYEE;
 
+
+
+	//NamedQueryの nameとquery
+		//全ての従業員をidの降順に取得する
+		String Q_FAV_GET_ALL = ENTITY_FAV + ".getAll"; //name
+		String Q_FAV_GET_ALL_DEF = "SELECT r.id,r.employee_id,r.report_date,r.title,r.content,r.created_at,r.updated_at FROM reports AS r INNER JOIN favorites AS f ON f.report_id = r.id WHERE f.employee_id = ?1 ORDER BY r.id DESC"; //query
+		//全ての従業員の件数を取得する
+		String Q_FAV_COUNT = ENTITY_FAV + ".count";
+		String Q_FAV_COUNT_DEF = "SELECT COUNT(f) FROM Favorites AS f";
+		//指定した社員番号を保持する従業員の件数を取得する
+		String Q_FAV_COUNT_REGISTERED_BY_CODE = ENTITY_FAV + ".countRegisteredByCode";
+
+		//NamedQueryの nameとquery
+		//全ての従業員をidの降順に取得する
+		String Q_CON_GET_ALL = ENTITY_CON + ".getAll"; //name
+//		String Q_CON_GET_ALL_DEF = "SELECT r FROM Report AS r INNER JOIN Confirmations AS c ON c.report_id = r.id WHERE c.employee_id = ORDER BY r.id DESC"; //query
+		String Q_CON_GET_ALL_DEF = "SELECT r.id,r.employee_id,r.report_date,r.title,r.content,r.created_at,r.updated_at FROM reports AS r INNER JOIN confirmations AS c ON c.report_id = r.id WHERE c.employee_id = ?1 ORDER BY r.id DESC"; //query
+		//全ての従業員の件数を取得する
+		String Q_CON_COUNT = ENTITY_CON + ".count";
+		String Q_CON_COUNT_DEF = "SELECT COUNT(c) FROM Confirmations AS c";
+		//指定した社員番号を保持する従業員の件数を取得する
+		String Q_CON_COUNT_REGISTERED_BY_CODE = ENTITY_CON + ".countRegisteredByCode";
 }
